@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Endpoint
+
+In the project, you can set the endpoint of **go-server** with env variable `REACT_APP_GO_ENDPOINT`. If the env is not set, the default value is [http://localhost:8080](http://localhost:8080).
+
 ## Available Scripts
 
 In the project directory, you can run:
