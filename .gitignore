@@ -8,7 +8,8 @@ package-lock.json
 
 # build
 *.exe
-
+mongodb
+vendor
 # testing
 /coverage
 

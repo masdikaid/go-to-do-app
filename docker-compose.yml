@@ -1,15 +1,31 @@
 version: '3'
 services:
-    mongodb:
+    database:
         image: mongo
-        ports:
-            - "27017:27017"
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
-            MONGO_INITDB_ROOT_PASSWORD: example
-            MONGO_INITDB_DATABASE: test
+            MONGO_INITDB_ROOT_PASSWORD: toor
+            MONGO_INITDB_DATABASE: todo
         restart: always
         volumes:
-            - mongo_data:/data/db
-volumes:
-    mongo_data:
+            - ./mongodb:/data/db
+    api:
+        image: masdikaid/todo-backend:1.0.0
+        ports:
+            - "8080:8080"
+        environment:
+            DB_URI: mongodb://root:toor@database:27017/
+            DB_NAME: todo
+            DB_COLLECTION_NAME: todolist
+        restart: always
+        depends_on: 
+            - database
+    web:
+        image: masdikaid/todo-frontend:1.0.0
+        ports:
+            - "80:80"
+        environment:
+            REACT_APP_GO_ENDPOINT: http://api:8080
+        restart: always
+        depends_on: 
+            - api
